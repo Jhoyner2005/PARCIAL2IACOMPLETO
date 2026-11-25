@@ -33,7 +33,7 @@ ROBOT_NAME = "actor - critic"
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "models", "a2c.zip")
 
 # Pasos de entrenamiento por defecto (se puede ajustar con TIMESTEPS en el env).
-TRAIN_TIMESTEPS = int(os.environ.get("TIMESTEPS", "100000"))
+TRAIN_TIMESTEPS = int(os.environ.get("TIMESTEPS", "50000"))
 
 # Hiperparámetros default-ish de A2C (valores por defecto de SB3 salvo seed):
 #   learning_rate=7e-4, n_steps=5, gamma=0.99, gae_lambda=1.0,

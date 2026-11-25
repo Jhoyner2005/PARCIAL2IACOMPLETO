@@ -29,7 +29,7 @@ ROBOT_NAME = "DQN"
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "models", "dqn.zip")
 
 # Pasos de entrenamiento por defecto (se puede ajustar con TIMESTEPS en el env).
-TRAIN_TIMESTEPS = int(os.environ.get("TIMESTEPS", "100000"))
+TRAIN_TIMESTEPS = int(os.environ.get("TIMESTEPS", "50000"))
 
 # Hiperparámetros default-ish de DQN (valores por defecto de SB3 salvo seed):
 #   learning_rate=1e-4, buffer_size=1e6, learning_starts=100,
