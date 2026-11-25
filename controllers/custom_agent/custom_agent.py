@@ -21,9 +21,7 @@ MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "models", "cust
 TRAIN_EPISODES = int(os.environ.get("EPISODES", "300"))
 GAMMA = float(os.environ.get("GAMMA", "0.99"))
 
-# ---------------------------------------------------------------------------
-# NUCLEO DEL TALLER 2 (intacto): modelo actor-critic + descubrimiento.
-# ---------------------------------------------------------------------------
+
 def create_model(n_inputs, n_actions):
     inputs = layers.Input(shape=(n_inputs,))
     x = layers.Dense(128, activation="relu")(inputs)
@@ -33,12 +31,7 @@ def create_model(n_inputs, n_actions):
     return tf.keras.Model(inputs=inputs, outputs=[actor, critic])
 
 class Curiosity:
-    """Descubrimiento por novedad (intacto del Taller 2).
-
-    Opera ahora sobre la observacion de 7 dims (ya normalizada) en vez de la RAM
-    de Atari; el mecanismo es identico: recompensa intrinseca ~ distancia al
-    estado mas cercano visto.
-    """
+    
     def __init__(self, max_size=2000, scale=0.5):
         self.memory = []
         self.max_size = max_size
@@ -56,13 +49,9 @@ class Curiosity:
         return self.scale * (min_dist / (min_dist + 1.0))
 
 def preprocess(obs):
-    # La observacion del entorno ya viene normalizada (Box de 7 floats); NO se
-    # divide entre 255 como en Atari. Solo se asegura el dtype.
+    
     return np.asarray(obs, dtype=np.float32)
 
-# ---------------------------------------------------------------------------
-# Entrenamiento Monte Carlo por episodio (formulacion del Taller 2, intacta).
-# ---------------------------------------------------------------------------
 def train(model, env, episodes=TRAIN_EPISODES, gamma=GAMMA, save_path=MODEL_PATH):
     optimizer = tf.keras.optimizers.Adam(learning_rate=0.001, clipnorm=1.0)
     huber_loss = tf.keras.losses.Huber()

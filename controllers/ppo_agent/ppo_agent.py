@@ -1,24 +1,11 @@
-"""Controlador Webots del robot 'ppo': agente PPO (stable-baselines3).
 
-PPO (Proximal Policy Optimization) es un algoritmo on-policy de gradiente de
-política con recorte (clipping) que equilibra estabilidad y simplicidad; es la
-opción por defecto recomendada por SB3 para espacios continuos/discretos.
-
-Dos modos (ver agent_runner.get_mode):
-    train -> entrena una política MlpPolicy y guarda models/ppo.zip.
-    race  -> recarga models/ppo.zip y corre un episodio de forma determinista.
-
-Hiperparámetros: se dejan en los valores por defecto de SB3 (documentados
-abajo) salvo la semilla; la sofisticación se reserva para el agente propio.
-"""
 
 from __future__ import annotations
 
 import os
 import sys
 
-# Permite importar el paquete común (agent_runner, race_env) tanto bajo el
-# pythonpath de pytest como al ejecutarse como controlador de Webots.
+
 _COMMON = os.path.join(os.path.dirname(__file__), "..", "darwin_common")
 if _COMMON not in sys.path:
     sys.path.insert(0, _COMMON)

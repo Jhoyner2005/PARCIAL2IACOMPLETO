@@ -1,24 +1,10 @@
-"""Controlador Webots del robot 'DQN': agente DQN (stable-baselines3).
-
-DQN (Deep Q-Network) es un algoritmo off-policy basado en valor: aprende una
-Q-función con una red MLP y un replay buffer, adecuado para espacios de acción
-discretos como el nuestro (Discrete(3)).
-
-Dos modos (ver agent_runner.get_mode):
-    train -> entrena una política MlpPolicy y guarda models/dqn.zip.
-    race  -> recarga models/dqn.zip y corre un episodio de forma determinista.
-
-Hiperparámetros: valores por defecto de SB3 (documentados abajo) salvo la
-semilla; la sofisticación se reserva para el agente propio.
-"""
 
 from __future__ import annotations
 
 import os
 import sys
 
-# Permite importar el paquete común (agent_runner, race_env) tanto bajo el
-# pythonpath de pytest como al ejecutarse como controlador de Webots.
+
 _COMMON = os.path.join(os.path.dirname(__file__), "..", "darwin_common")
 if _COMMON not in sys.path:
     sys.path.insert(0, _COMMON)
@@ -42,7 +28,7 @@ HYPERPARAMS = {
 
 
 def _build_backend():
-    """Obtiene el Supervisor de Webots (solo disponible dentro del simulador)."""
+    
     from controller import Supervisor
 
     return Supervisor()

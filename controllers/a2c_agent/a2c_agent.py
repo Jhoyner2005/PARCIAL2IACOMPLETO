@@ -1,28 +1,10 @@
-"""Controlador Webots del robot 'actor - critic': agente A2C (stable-baselines3).
-
-A2C (Advantage Actor-Critic) es un algoritmo on-policy actor-crítico: una red
-estima la política (actor) y otra el valor (crítico), usando la ventaja para
-reducir la varianza del gradiente. Es la versión síncrona del clásico A3C.
-
-Nota de distribución: la carpeta del controlador es `a2c_agent`, así que el
-campo 'controller' de este robot en el .wbt será 'a2c_agent' (aunque el robot
-se llame 'actor - critic').
-
-Dos modos (ver agent_runner.get_mode):
-    train -> entrena una política MlpPolicy y guarda models/a2c.zip.
-    race  -> recarga models/a2c.zip y corre un episodio de forma determinista.
-
-Hiperparámetros: valores por defecto de SB3 (documentados abajo) salvo la
-semilla; la sofisticación se reserva para el agente propio.
-"""
 
 from __future__ import annotations
 
 import os
 import sys
 
-# Permite importar el paquete común (agent_runner, race_env) tanto bajo el
-# pythonpath de pytest como al ejecutarse como controlador de Webots.
+
 _COMMON = os.path.join(os.path.dirname(__file__), "..", "darwin_common")
 if _COMMON not in sys.path:
     sys.path.insert(0, _COMMON)
@@ -45,7 +27,7 @@ HYPERPARAMS = {
 
 
 def _build_backend():
-    """Obtiene el Supervisor de Webots (solo disponible dentro del simulador)."""
+    
     from controller import Supervisor
 
     return Supervisor()

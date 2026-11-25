@@ -200,12 +200,13 @@ class DarwinRaceEnv(gym.Env):
             reward -= 30.0
             terminated = True
 
-        clamped_x = max(-8.8, min(8.8, px))
-        dist_from_centerline = math.hypot(px - clamped_x, py)
-        if dist_from_centerline > 13.6 or dist_from_centerline < 4.2:
-            reward -= 35.0
-            terminated = True
-
+        # Nota: antes había aquí una terminación por "banda radial"
+        # (dist_from_centerline fuera de [4.2, 13.6]) que mataba el episodio al
+        # cruzar el ápice de las curvas (checkpoints 3->4->5, x~13.5, y~0),
+        # impidiendo completar la vuelta. Se eliminó: la contención en pista la
+        # ejerce la penalización off_track de abajo (distancia al segmento de la
+        # línea de carrera), que es correcta para el óvalo y NO termina el
+        # episodio. El límite de duración real es MAX_EPISODE_STEPS.
         off_segment = result["off_segment"]
         if off_segment is not None:
             (ax, ay), (bx, by) = off_segment
