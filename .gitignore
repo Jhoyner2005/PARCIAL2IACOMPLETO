@@ -18,7 +18,6 @@ build/
 dist/
 
 # === Artefactos generados en runtime (se conservan los .gitkeep) ===
-models/*.zip
 models/*.npz
 results/*.csv
 results/*.png
